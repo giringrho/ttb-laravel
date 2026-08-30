@@ -230,7 +230,7 @@ export default function Order({ jobKeys }: { jobKeys?: string[] }) {
                     </CardHeader>
                     <CardContent>
                         <h3>1. Dari mana proses upload file dimulai?</h3>
-                        <p>Ketika button upload diklik dan akan run fungsi submit() yang di trigger dari onSubmit {"<form>"}. Lalu akan fungsi submit() akan melakukan request ke endpoint "/" dengan methode POST.</p>
+                        <p>Ketika button upload diklik dan akan run fungsi submit() yang di trigger dari onSubmit {"<form>"}. Lalu fungsi submit() akan melakukan request ke endpoint "/" dengan methode POST.</p>
                         <br />
                         <h3>2. Di bagian mana validasi dilakukan?</h3>
                         <p>Validasi dilakukan di backend, di job OrderValidateJob.php fungsi validateData()</p>

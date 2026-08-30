@@ -1,0 +1,84 @@
+services:
+  - type: web
+    name: ttb-laravel
+    runtime: docker
+    plan: free
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /
+    envVars:
+      - key: APP_ENV
+        value: production
+      - key: APP_DEBUG
+        value: false
+      - key: APP_KEY
+        sync: false
+      - key: APP_URL
+        sync: false
+      - key: DB_CONNECTION
+        value: pgsql
+      - key: DB_HOST
+        fromDatabase:
+          name: ttb-db
+          property: host
+      - key: DB_PORT
+        value: 5432
+      - key: DB_DATABASE
+        fromDatabase:
+          name: ttb-db
+          property: database
+      - key: DB_USERNAME
+        fromDatabase:
+          name: ttb-db
+          property: user
+      - key: DB_PASSWORD
+        fromDatabase:
+          name: ttb-db
+          property: password
+      - key: QUEUE_CONNECTION
+        value: database
+      - key: CACHE_STORE
+        value: file
+      - key: SESSION_DRIVER
+        value: database
+      - key: FILESYSTEM_DISK
+        value: local
+
+  - type: worker
+    name: ttb-queue-worker
+    runtime: docker
+    dockerfilePath: ./Dockerfile
+    plan: free
+    dockerCommand: php artisan queue:work --verbose --tries=3 --timeout=90
+    envVars:
+      - key: APP_ENV
+        value: production
+      - key: APP_KEY
+        sync: false
+      - key: DB_CONNECTION
+        value: pgsql
+      - key: DB_HOST
+        fromDatabase:
+          name: ttb-db
+          property: host
+      - key: DB_PORT
+        value: 5432
+      - key: DB_DATABASE
+        fromDatabase:
+          name: ttb-db
+          property: database
+      - key: DB_USERNAME
+        fromDatabase:
+          name: ttb-db
+          property: user
+      - key: DB_PASSWORD
+        fromDatabase:
+          name: ttb-db
+          property: password
+      - key: QUEUE_CONNECTION
+        value: database
+      - key: CACHE_STORE
+        value: file
+
+databases:
+  - name: ttb-db
+    plan: free

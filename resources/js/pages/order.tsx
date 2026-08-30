@@ -255,6 +255,19 @@ export default function Order({ jobKeys }: { jobKeys?: string[] }) {
                     </CardContent>
                 </Card>
             </div>
+
+            <div className="mx-auto max-w-4xl space-y-6 p-6">
+                <Card>
+                    <CardHeader>
+                        <CardTitle>Link Repository</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                        <a href="https://github.com/giringrho/ttb-laravel" target="_blank" rel="noopener noreferrer">
+                            https://github.com/giringrho/ttb-laravel
+                        </a>
+                    </CardContent>
+                </Card>
+            </div>
         </>
     );
 }
